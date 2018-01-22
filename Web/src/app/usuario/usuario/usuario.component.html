@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title">Usuario</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form>
+      <div class="form-group row">
+          <label for="nombre" class="col-2 col-form-label">Nombre</label>
+          <div class="col-10">
+              <input type="text" class="form-control" id="nombre"  placeholder="Nombre">
+          </div>
+          
+      </div>
+      <div class="form-group row">
+          <label for="correo" class="col-2 col-form-label">Correo </label>
+          <div class="col-10">
+              <input type="email" class="form-control" id="correo" placeholder="Correo electronico">
+          </div>
+        </div>
+      <div class="form-group row">
+            <label for="direccion" class="col-2 col-form-label">Direccion</label>
+            <div class="col-10">
+                <input type="text" class="form-control" id="direccion"  placeholder="Direccion">
+            </div>
+      </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cancelar</button>
+  <button type="button" class="btn btn-primary" (click)="guardar()">Guardar</button>
+</div>

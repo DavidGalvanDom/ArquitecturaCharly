@@ -1,0 +1,34 @@
+<div class="auth-page">
+  <div class="container page">
+    <div class="row">
+
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center"> CSS Portal </h1>
+
+        <chr-lista-errores [errors]="errors"></chr-lista-errores>
+        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+          <fieldset [disabled]="isSubmitting">
+            <fieldset class="form-group">
+              <input
+                formControlName="usuario"
+                placeholder="Usuario"
+                class="form-control form-control-lg"
+                type="text" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input
+                formControlName="contrasena"
+                placeholder="Contraseña"
+                class="form-control form-control-lg"
+                type="password" />
+            </fieldset>
+            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+              Aceptar
+            </button>
+          </fieldset>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>

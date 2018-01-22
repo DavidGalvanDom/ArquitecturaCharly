@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col"></div>
+  <div class="col-12 col-md-auto">
+  <h3>
+    Lista de 
+    <small>
+      Usuarios
+    </small>
+  </h3>
+  <button class="btn btn-secondary" (click)="nuevo()" >Nuevo</button>
+  <ngx-datatable
+    class="bootstrap"
+    [rows]="rows"
+    [loadingIndicator]="loadingIndicator"
+    [columns]="columns"
+    [columnMode]="'force'"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [reorderable]="reorderable">
+  </ngx-datatable>
+</div>
+</div>
