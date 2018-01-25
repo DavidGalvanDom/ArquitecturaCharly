@@ -5,20 +5,22 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+using Chr.Css.WebApi.Entities;
+
 namespace Chr.Css.WebApi.Controllers
 {
+    [RoutePrefix("api/Usuario")]
     public class UsuarioController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/values/5
-        public string Get(int id)
+        [Authorize]
+        [Route("")]
+        public IHttpActionResult Get()
         {
-            return "value";
+            using (var context = new CSSUsersEntities())
+            {
+                return Ok(context.Usuarios.ToList());
+            }
         }
 
         // POST api/values
