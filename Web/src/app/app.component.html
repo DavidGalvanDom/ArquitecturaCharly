@@ -1,21 +1,21 @@
 
-<!--
-<ng-sidebar-container>
- 
-        
-        <ng-sidebar [(opened)]="_opened">
-          <p>Sidebar contents</p>
-        </ng-sidebar>
-   
-        
-        <div ng-sidebar-content>
-          <button (click)="_toggleSidebar()">Toggle sidebar</button>
-        </div>
+<chr-loader></chr-loader>
+
+<ng-sidebar-container style="height: 100vh">
+  <ng-sidebar [(opened)]="_opened"
+              mode="push"
+              animate="true"
+              [hidden]="!auth.isLoggedInUser" 
+              autoCollapseWidth=500>
+    <chr-sidebar (cerrarEvent)="cerrarSideBar()"></chr-sidebar>
+  </ng-sidebar>
+
+  <div ng-sidebar-content>
+    <chr-nav [hidden]="!auth.isLoggedInUser" (menuEvent)="menu()" (salirEvent)="salir()" ></chr-nav>
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+  </div>
 
 </ng-sidebar-container>
--->
-<chr-nav [hidden]="!auth.isLoggedInUser" ></chr-nav>
-<div class="container">
-        <button (click)="_toggleSidebar()">Toggle sidebar</button>
-    <router-outlet></router-outlet>
-</div>
+

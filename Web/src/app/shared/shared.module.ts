@@ -18,7 +18,7 @@ import { UsuarioService } from './service/usuario.service';
     ReactiveFormsModule,
     RouterModule
   ],
-  declarations: [PageNotFoundComponent, ListaErroresComponent],
+  
   exports: [  
     CommonModule,
     NgbModule,
@@ -27,6 +27,7 @@ import { UsuarioService } from './service/usuario.service';
     ReactiveFormsModule,
     RouterModule
   ],
+  declarations: [PageNotFoundComponent, ListaErroresComponent],
   providers: [ AuthService, AuthGuardService, UsuarioService ]
 })
 export class SharedModule { }

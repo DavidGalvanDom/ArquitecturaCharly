@@ -5,6 +5,7 @@ import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AutenticacionRoutingModule } from './autenticacion-routing.module';
 import { AutenticacionComponent } from './autenticacion/autenticacion.component';
 import { SharedModule } from '../shared/shared.module';
+import { AutentificacionService } from './shared/autentificacion.service';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { SharedModule } from '../shared/shared.module';
     SharedModule,
     AutenticacionRoutingModule
   ],
+  providers: [AutentificacionService],
   declarations: [AutenticacionComponent]
 })
 export class AutenticacionModule { }

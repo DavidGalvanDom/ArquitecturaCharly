@@ -1,6 +1,4 @@
-<div class="row">
-  <div class="col"></div>
-  <div class="col-12 col-md-auto">
+
   <h3>
     Lista de 
     <small>
@@ -8,8 +6,10 @@
     </small>
   </h3>
   <button class="btn btn-secondary" (click)="nuevo()" >Nuevo</button>
+  <chr-lista-errores [errors]="errors"></chr-lista-errores>
+  <br>
   <ngx-datatable
-    class="bootstrap"
+    class="bootstrap  fullscreen"
     [rows]="rows"
     [loadingIndicator]="loadingIndicator"
     [columns]="columns"
@@ -19,5 +19,4 @@
     [rowHeight]="'auto'"
     [reorderable]="reorderable">
   </ngx-datatable>
-</div>
-</div>
+  <br>

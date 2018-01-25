@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Errors } from '../../shared';
 import { AuthService } from '../../shared/service/auth.service';
+import { AutentificacionService } from '../shared/autentificacion.service';
 
 @Component({
   selector: 'chr-autenticacion',
@@ -12,13 +13,13 @@ import { AuthService } from '../../shared/service/auth.service';
 })
 export class AutenticacionComponent implements OnInit {
 
-  authType: String = '';
   title: String = '';
   errors: Errors = new Errors();
   isSubmitting = false;
   authForm: FormGroup;
 
   constructor( private route: ActivatedRoute,
+    private usuarioService: AutentificacionService,
     private router: Router,
     private auth: AuthService,
     private fb: FormBuilder) { 
@@ -38,23 +39,30 @@ export class AutenticacionComponent implements OnInit {
   submitForm() {
     this.isSubmitting = true;
     this.errors = new Errors();
-
     const credentials = this.authForm.value;
 
-    console.log(credentials);
-    this.auth.redirectUrl = this.auth.redirectUrl === "login" ? "inicio": this.auth.redirectUrl;
-    this.auth.loggedIn(true,"mytoken","1",this.authForm.get('usuario').value);
-    this.router.navigate([this.auth.redirectUrl]);
-    
-   /* this.userService
-    .attemptAuth(this.authType, credentials)
-    .subscribe(
-      data => this.router.navigateByUrl('/'),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
-      }
-    );*/
+    this.usuarioService.loginUser(credentials)
+                        .subscribe(
+                          data => { this.userAutorizacion(data); },
+                          err => {
+                            //this.errors = err;
+                            this.errors.errors = { "Descripcion:" : "Error al conectarse con el servidor."};
+                            this.isSubmitting = false;
+                          }
+                        );
+  }
+
+  private userAutorizacion(data: any) {
+    if(data.access_token != null) {
+      this.auth.redirectUrl = this.auth.redirectUrl === "login" ? "inicio": this.auth.redirectUrl;
+      this.auth.loggedIn(true,data.access_token,"1",this.authForm.get('usuario').value);
+      this.router.navigate([this.auth.redirectUrl]);
+    } else {
+      this.errors = new Errors();
+      this.errors.errors = { "Descripcion:" : "Usuario o contrasena incorrectos."};
+      this.isSubmitting = false;
+    }
+
   }
 
 }

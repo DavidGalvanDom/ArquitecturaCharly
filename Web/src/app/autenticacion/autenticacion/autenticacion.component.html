@@ -1,10 +1,10 @@
 <div class="auth-page">
   <div class="container page">
-    <div class="row">
+    <div class="row align-items-center justify-content-center">
 
       <div class="col-md-6 offset-md-3 col-xs-12">
+        <br />
         <h1 class="text-xs-center"> CSS Portal </h1>
-
         <chr-lista-errores [errors]="errors"></chr-lista-errores>
         <form [formGroup]="authForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">

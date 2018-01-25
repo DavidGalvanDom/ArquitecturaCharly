@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import { UsuarioComponent } from '../usuario/usuario.component';
+import { UsuarioService } from '../shared/usuario.service'; 
+import { Errors } from '../../shared';
+
+//http://swimlane.github.io/ngx-datatable/
 
 @Component({
   selector: 'chr-lista-usuario',
@@ -9,6 +13,7 @@ import { UsuarioComponent } from '../usuario/usuario.component';
   styleUrls: ['./lista-usuario.component.scss']
 })
 export class ListaUsuarioComponent implements OnInit {
+  errors: Errors = new Errors();
 
   ngOnInit() {
   }
@@ -18,16 +23,15 @@ export class ListaUsuarioComponent implements OnInit {
   reorderable: boolean = true;
 
   columns = [
-    { prop: 'name' },
-    { name: 'Gender' },
-    { name: 'Company', sortable: false }
+    { prop: 'idUsuario' },
+    { name: 'nombreUsuario' },
+    { name: 'Correo', sortable: false },
+    { name: 'Direccion', sortable: false }
   ];
 
-  constructor(private modalService: NgbModal) {
-    this.fetch((data) => {
-      this.rows = data;
-      setTimeout(() => { this.loadingIndicator = false; }, 1500);
-    });
+  constructor(private modalService: NgbModal,
+              private userService: UsuarioService) {
+      this.loadUsuarios();
   }
 
   nuevo(){
@@ -35,15 +39,11 @@ export class ListaUsuarioComponent implements OnInit {
     modalRef.componentInstance.name = 'World';
   }
 
-  fetch(cb) {
-    const req = new XMLHttpRequest();
-    req.open('GET', `assets/data/company.json`);
-
-    req.onload = () => {
-      cb(JSON.parse(req.response));
-    };
-
-    req.send();
+  private loadUsuarios() {
+    this.userService.get().
+      subscribe( 
+        data => this.rows = data,
+        (error: any) => this.errors = <any>error);
   }
 
 }

@@ -16,7 +16,6 @@ export class ListaErroresComponent {
   @Input()
   set errors(errorList: Errors) {
     this.formattedErrors = [];
-
     if (errorList.errors) {
       for (const field in errorList.errors) {
         this.formattedErrors.push(`${field} ${errorList.errors[field]}`);
