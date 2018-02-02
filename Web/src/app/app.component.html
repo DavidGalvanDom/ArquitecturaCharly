@@ -1,12 +1,9 @@
-
 <chr-loader></chr-loader>
 
 <ng-sidebar-container style="height: 100vh">
   <ng-sidebar [(opened)]="_opened"
               mode="push"
-              animate="true"
-              [hidden]="!auth.isLoggedInUser" 
-              autoCollapseWidth=500>
+              animate="true" >
     <chr-sidebar (cerrarEvent)="cerrarSideBar()"></chr-sidebar>
   </ng-sidebar>
 
@@ -16,6 +13,5 @@
         <router-outlet></router-outlet>
     </div>
   </div>
-
 </ng-sidebar-container>
 

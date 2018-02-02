@@ -21,8 +21,8 @@ export class NavComponent implements OnInit {
     this.router.navigate(["login"]);
   }
 
-  menu(){
-      this.menuEvent.emit('menu');
+  menu() {
+    this.menuEvent.emit('menu');
   }
 
 }

@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/finally';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import {
     Http,
@@ -42,7 +43,7 @@ export class HttpService extends Http {
                 this.onSuccess(res);
             }, (error: any) => {
                 this.onError(error);
-                return Observable.throw(error);
+                return this.formatErrors(error);
             })
             .finally(() => {
                 this.onEnd();
@@ -58,7 +59,7 @@ export class HttpService extends Http {
                 this.onSuccess(res);
             }, (error: any) => {
                 this.onError(error);
-                return Observable.throw(error);
+                return this.formatErrors(error);
             })
             .finally(() => {
                 this.onEnd();
@@ -67,14 +68,13 @@ export class HttpService extends Http {
 
     get(url: string, options?: RequestOptionsArgs): Observable<any> {
         this.showLoader();
-        console.log(this.requestOptions(options));
         return super.get(this.getFullUrl(url), this.requestOptions(options))
             .catch(this.onCatch)
             .do((res: Response) => {
                 this.onSuccess(res);
             }, (error: any) => {
                 this.onError(error);
-                return Observable.throw(error);
+                return this.formatErrors(error);
             })
             .finally(() => {
                 this.onEnd();
@@ -91,11 +91,15 @@ export class HttpService extends Http {
                 this.onSuccess(res);
             }, (error: any) => {
                 this.onError(error);
-                return Observable.throw(error);
+                return this.formatErrors(error);
             })
             .finally(() => {
                 this.onEnd();
             });
+    }
+
+    private formatErrors(error: any) {
+        return new ErrorObservable(error.json());
     }
 
     private requestOptions(options?: RequestOptionsArgs): RequestOptionsArgs {

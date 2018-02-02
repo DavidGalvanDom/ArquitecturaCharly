@@ -10,7 +10,7 @@ import { AuthService } from './shared/service/auth.service';
 export class AppComponent {
   constructor( public auth: AuthService) {}
 
-  private _opened: boolean = true;
+  private _opened: boolean = false;
  
   private _toggleSidebar() {
     this._opened = !this._opened;

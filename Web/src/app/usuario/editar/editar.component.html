@@ -1,3 +1,42 @@
-<p>
-  editar works!
-</p>
+<div class="modal-header">
+    <h4 class="modal-title">Editar Usuario</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="usuarioForm" (ngSubmit)="actualizar()">
+      <div class="modal-body">
+      
+            <chr-lista-errores [errors]="errors"></chr-lista-errores>
+            <div class="form-group row">
+                <label for="nombre" class="col-2 col-form-label">Id</label>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="idUsuairo" formControlName="idUsuario"  placeholder="IdUsuario">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="nombre" class="col-2 col-form-label">Nombre</label>
+                <div class="col-10">
+                    <input type="text" class="form-control" id="nombre" formControlName="nombreUsuario"  placeholder="Nombre">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="correo" class="col-2 col-form-label">Correo </label>
+                <div class="col-10">
+                    <input type="email" class="form-control" id="correo" formControlName="correo" placeholder="Correo electronico">
+                </div>
+              </div>
+            <div class="form-group row">
+                  <label for="direccion" class="col-2 col-form-label">Direccion</label>
+                  <div class="col-10">
+                      <input type="text" class="form-control" id="direccion" formControlName="direccion"  placeholder="Direccion">
+                  </div>
+            </div>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Cancelar</button>
+        <button type="submit" class="btn btn-primary"  [disabled]="!usuarioForm.valid"  >Guardar</button>
+      </div>
+      </form>
+      

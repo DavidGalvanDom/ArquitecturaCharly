@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
+import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
+
 
 import { CONFIG } from '../../core/config';
 import { HttpService } from '../../core/httpConfig/http.service';
@@ -18,12 +20,17 @@ export class AutentificacionService {
                "&password=" + credenciales.contrasena +
                "&client_id=199153c2315149bc9ecb3e85e03f1144" +
                "&grant_type=password";
+
     return this.http.post(CONFIG.baseUrls.token ,body,this.getOptionsRequest() )
     .map(this.extractData)
     .catch(error => {
-      return Observable.throw(error);
+      return this.formatErrors(error);
     });
   }
+
+  private formatErrors(error: any) {
+    return new ErrorObservable(error.json());
+  } 
 
   private extractData(response: Response) {
     return response.text() ? response.json() : {};

@@ -14,7 +14,7 @@ import { AutentificacionService } from '../shared/autentificacion.service';
 export class AutenticacionComponent implements OnInit {
 
   title: String = '';
-  errors: Errors = new Errors();
+  errors: Errors = {errors: {}};
   isSubmitting = false;
   authForm: FormGroup;
 
@@ -38,15 +38,14 @@ export class AutenticacionComponent implements OnInit {
 
   submitForm() {
     this.isSubmitting = true;
-    this.errors = new Errors();
+    this.errors = {errors: {}};
     const credentials = this.authForm.value;
 
     this.usuarioService.loginUser(credentials)
                         .subscribe(
                           data => { this.userAutorizacion(data); },
                           err => {
-                            //this.errors = err;
-                            this.errors.errors = { "Descripcion:" : "Error al conectarse con el servidor."};
+                            this.MensajeError(err);
                             this.isSubmitting = false;
                           }
                         );
@@ -57,12 +56,17 @@ export class AutenticacionComponent implements OnInit {
       this.auth.redirectUrl = this.auth.redirectUrl === "login" ? "inicio": this.auth.redirectUrl;
       this.auth.loggedIn(true,data.access_token,"1",this.authForm.get('usuario').value);
       this.router.navigate([this.auth.redirectUrl]);
-    } else {
-      this.errors = new Errors();
-      this.errors.errors = { "Descripcion:" : "Usuario o contrasena incorrectos."};
+    } else { 
+      this.errors = {errors: {"Descripcion: ": "Usuario o contraseña incorrectos"}};
       this.isSubmitting = false;
     }
-
   }
 
+  private MensajeError(err: any) {
+    if(err.error === "invalid_grant") {
+      this.errors = {errors: {"Descripcion: ": "Usuario o contraseña incorrectos."}};
+    } else {
+      this.errors = {errors: {"Descripcion: ": "Error al conectarse con el servidor"}};
+    }
+  }
 }

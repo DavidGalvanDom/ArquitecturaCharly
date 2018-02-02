@@ -6,8 +6,8 @@ import { UsuarioRoutingModule } from './usuario-routing.module';
 import { ListaUsuarioComponent } from './lista-usuario/lista-usuario.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { SharedModule } from '../shared/shared.module';
-import { UsuarioService } from './shared/usuario.service';
 import { EditarComponent } from './editar/editar.component';
+import { MensajeComponent } from '../shared/mensaje/mensaje.component';
 
 @NgModule({
   imports: [
@@ -16,8 +16,7 @@ import { EditarComponent } from './editar/editar.component';
     NgxDatatableModule,
     SharedModule
   ],
-  entryComponents: [ UsuarioComponent ],
-  providers: [UsuarioService],
+  entryComponents: [ UsuarioComponent,EditarComponent,MensajeComponent ],
   declarations: [ ListaUsuarioComponent, UsuarioComponent, EditarComponent ]
 })
 export class UsuarioModule { }
