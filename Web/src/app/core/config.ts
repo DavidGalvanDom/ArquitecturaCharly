@@ -4,6 +4,7 @@ export const CONFIG = {
       logOut:'/Login/LogOut',
       UserActive: '/User/UsersActive',
 
-      Usuario: '/api/Usuario'
+      Usuario: '/api/Usuario',
+      Modulo: '/api/Modulo'
     }
   };

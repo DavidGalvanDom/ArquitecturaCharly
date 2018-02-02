@@ -1,5 +1,3 @@
-<chr-loader></chr-loader>
-
 <ng-sidebar-container style="height: 100vh">
   <ng-sidebar [(opened)]="_opened"
               mode="push"
@@ -10,8 +8,8 @@
   <div ng-sidebar-content>
     <chr-nav [hidden]="!auth.isLoggedInUser" (menuEvent)="menu()" (salirEvent)="salir()" ></chr-nav>
     <div class="container-fluid">
+        <chr-loader></chr-loader>
         <router-outlet></router-outlet>
     </div>
   </div>
 </ng-sidebar-container>
-

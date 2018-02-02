@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarModule } from 'ng-sidebar';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ import { UsuarioModule } from './usuario/usuario.module';
     
     AppRoutingModule,
     SidebarModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    SlimLoadingBarModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 
 import { PageNotFoundComponent } from './page-not-found.component';
 import { ListaErroresComponent } from './lista-errores/lista-errores.component';
@@ -10,6 +11,7 @@ import { AuthService } from './service/auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { UsuarioService } from './service/usuario.service';
 import { MensajeComponent } from './mensaje/mensaje.component';
+import { ModuloService } from './service/modulo.service';
 
 @NgModule({
   imports: [
@@ -17,7 +19,8 @@ import { MensajeComponent } from './mensaje/mensaje.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    SlimLoadingBarModule.forRoot()
   ],
   exports: [  
     CommonModule,
@@ -26,9 +29,10 @@ import { MensajeComponent } from './mensaje/mensaje.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-    MensajeComponent
+    MensajeComponent,
+    SlimLoadingBarModule
   ],
   declarations: [PageNotFoundComponent, ListaErroresComponent, MensajeComponent],
-  providers: [ AuthService, AuthGuardService, UsuarioService ]
+  providers: [ AuthService, AuthGuardService, UsuarioService,ModuloService ]
 })
 export class SharedModule { }

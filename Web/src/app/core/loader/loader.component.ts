@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
+import {SlimLoadingBarService} from 'ng2-slim-loading-bar';
 
 import { LoaderService } from './loader.service';
 import { LoaderState } from './loader';
@@ -13,13 +14,18 @@ export class LoaderComponent implements OnInit {
   public show: boolean = false;
   private subscription: Subscription;
 
-  constructor(private loaderService: LoaderService) { }
-
+  constructor(private loaderService: LoaderService,
+              private slimLoadingBarService: SlimLoadingBarService) { }
 
   ngOnInit() {
     this.subscription = this.loaderService.loaderState
     .subscribe((state: LoaderState) => {
-        this.show = state.show;
+        
+      if(state.show) {
+        this.slimLoadingBarService.start();
+      } else {
+        this.slimLoadingBarService.complete();
+      }
     });
   }
 

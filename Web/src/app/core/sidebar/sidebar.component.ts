@@ -1,4 +1,8 @@
 import { Component, OnInit,EventEmitter,Output  } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { ModuloService } from '../../shared/service/modulo.service';
+import { Modulo } from '../../shared/models/modulo.model';
 
 @Component({
   selector: 'chr-sidebar',
@@ -7,11 +11,19 @@ import { Component, OnInit,EventEmitter,Output  } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
+  public modulos: Modulo[] = [];
+  
   @Output() cerrarEvent :EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor(private router: Router,
+             private modulService: ModuloService) { }
 
   ngOnInit() {
+    this.modulService.obtenerModulos().
+    subscribe( data => {
+      console.log(data);
+      this.modulos = data
+    } );
   }
 
   inicio() {
