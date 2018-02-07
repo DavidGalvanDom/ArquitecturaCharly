@@ -12,6 +12,7 @@ import { AuthGuardService } from './auth-guard.service';
 import { UsuarioService } from './service/usuario.service';
 import { MensajeComponent } from './mensaje/mensaje.component';
 import { ModuloService } from './service/modulo.service';
+import { CiudadService } from './service/ciudad.service';
 
 @NgModule({
   imports: [
@@ -33,6 +34,6 @@ import { ModuloService } from './service/modulo.service';
     SlimLoadingBarModule
   ],
   declarations: [PageNotFoundComponent, ListaErroresComponent, MensajeComponent],
-  providers: [ AuthService, AuthGuardService, UsuarioService,ModuloService ]
+  providers: [ AuthService, AuthGuardService, UsuarioService,ModuloService,CiudadService ]
 })
 export class SharedModule { }

@@ -5,6 +5,7 @@ export const CONFIG = {
       UserActive: '/User/UsersActive',
 
       Usuario: '/api/Usuario',
-      Modulo: '/api/Modulo'
+      Modulo: '/api/Modulo',
+      Ciudad: '/api/Ciudad'
     }
   };
